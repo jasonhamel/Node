@@ -18,6 +18,10 @@ inquirer
   .then((answers) => {
     qr_svg = qr.image(answers.URL);
     qr_svg.pipe(fs.createWriteStream("entered_url.png"));
+    fs.writeFile("url.txt", answers.URL, (error) => {
+      if (error) throw error;
+      console.log("The file has been saved!");
+    });
   })
   .catch((error) => {
     if (error.isTtyError) {
